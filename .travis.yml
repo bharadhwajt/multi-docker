@@ -4,19 +4,19 @@ services:
 
 
 before_install:
-  - docker build -t bhar/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t bharadhwajt/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run bhar/react-test npm test -- --coverage
+  - docker run bharadhwajt/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t bhar/multi-client ./client 
-  - docker build -t bhar/multi-nginx ./nginx 
-  - docker build -t bhar/multi-server  ./server 
-  - docker build -t bhar/multi-worker ./worker 
+  - docker build -t bharadhwajt/multi-client ./client 
+  - docker build -t bharadhwajt/multi-nginx ./nginx 
+  - docker build -t bharadhwajt/multi-server  ./server 
+  - docker build -t bharadhwajt/multi-worker ./worker 
   # Push to Docker Hub
   - echo "DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password--stdin
-  - docker push bhar/multi-client
-  - docker push bhar/multi-nginx
-  - docker push bhar/multi-server
-  - docker push bhar/multi-worker
+  - docker push bharadhwajt/multi-client
+  - docker push bharadhwajt/multi-nginx
+  - docker push bharadhwajt/multi-server
+  - docker push bharadhwajt/multi-worker
