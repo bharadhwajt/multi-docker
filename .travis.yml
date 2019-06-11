@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+
+before_install:
+  - docker build -t bhar/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run bhar/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t bhar/multi-client ./client 
+  - docker build -t bhar/multi-nginx ./nginx 
+  - docker build -t bhar/multi-server  ./server 
+  - docker build -t bhar/multi-worker ./worker 
+  # Push to Docker Hub
+  - echo "DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password--stdin
+  - docker push bhar/multi-client
+  - docker push bhar/multi-nginx
+  - docker push bhar/multi-server
+  - docker push bhar/multi-worker
