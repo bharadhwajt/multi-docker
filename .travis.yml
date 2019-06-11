@@ -15,7 +15,7 @@ after_success:
   - docker build -t bharadhwajt/multi-server  ./server 
   - docker build -t bharadhwajt/multi-worker ./worker 
   # Push to Docker Hub
-  - echo "DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - docker login -u bharadhwajt --password Srinivas07
   - docker push bharadhwajt/multi-client
   - docker push bharadhwajt/multi-nginx
   - docker push bharadhwajt/multi-server
